@@ -1,7 +1,10 @@
 <html ng-app='app'>
-    <head>
-    </head>
-    <body ng-controller='MyCtrl'>
-        {{ myProperty }}
-    </body>
+  <head>
+    <script src="assets/lib/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="bundle.js"></script>
+  </head>
+  <body ng-controller='AccountCtrl as accountCtrl'>
+    My property: {{ accountCtrl.myProperty }}
+  </body>
 </html>

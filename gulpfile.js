@@ -1,6 +1,10 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var open = require('gulp-open');
+var babel = require('gulp-babel');
+var concat = require('gulp-concat');
+
+//@todo: add linting
 
 var config = {
     port: 9008,
@@ -10,8 +14,9 @@ var config = {
             './index.html'
         ],
         js: [
-            './src/**/*.js'
-        ]
+            './app/src/**/*.js'
+        ],
+        appJs: './app/app.js'
     },
     browser: 'chrome'
 };
@@ -39,8 +44,20 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('watch', function() {
-    gulp.watch(config.paths.html, ['html']);
+gulp.task('js', function() {
+  gulp.src(config.paths.js)
+    .pipe(concat('bundle.js'))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('.'))
+    .pipe(connect.reload());
 });
 
-gulp.task('default', ['open', 'watch']);
+gulp.task('watch', function() {
+    gulp.watch(config.paths.html, ['html']);
+    gulp.watch(config.paths.js, ['js']);
+    gulp.watch(config.paths.appJs, ['js']);
+});
+
+gulp.task('default', ['open', 'js', 'watch']);
