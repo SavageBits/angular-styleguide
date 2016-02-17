@@ -1,0 +1,11 @@
+{
+  "id" : 42,
+  "firstName" : "Jon",
+  "lastName"  : "McCarty",
+  "title"     : "Loan Officer",
+  "photo"     : "https://s3.amazonaws.com/uifaces/faces/twitter/commadelimited/128.jpg",
+  "email"     : "Jon.McCarty@VeteransUnited.com",
+  "phone"     : "1-800-884-5560 x 4028",
+  "nmls"      : "99066"
+}
+

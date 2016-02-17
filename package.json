@@ -1,12 +1,11 @@
 {
   "name": "angular-styleguide",
   "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Best practices for AngularJS 1.x + ES6",
+  "main": "index.html",
+  "scripts": {    
   },
-  "author": "",
+  "author": "Mark Savage",
   "license": "ISC",
   "devDependencies": {
     "babel-preset-es2015": "^6.5.0",

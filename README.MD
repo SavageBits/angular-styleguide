@@ -23,13 +23,52 @@ Where possible, I have provided code examples in ECMAScript 6. If there is no ES
 
 ## Getting Started
 
+All commands below are from your terminal or command line
+
+  1. **Clone the project.** `git clone https://github.com/SavageBits/angular-styleguide.git`
+  2. **Install the dependencies.** `npm install`
+  3. **Build and run.** `gulp`
+
+This will build the AngularJS 1.x app and open in your default browser.
+
 ## Build Tools and transpilation
 
 ## App entry
 
 ## Controllers
 
+```javascript
+/* ES6 */
+class MyCtrl {
+  constructor() {
+      this.myProperty = 'my property';
+  }
+}
+
+angular
+  .module('app')
+  .controller('MyCtrl', MyCtrl);
+```
+
 ## Services
+
+```javascript
+/* ES6 */
+class MySvc {
+  constructor($http) {    
+      this.$http = $http;
+  }
+
+  myGetFunction(myApiRoute) {
+    return this.$http.get(myApiRoute);
+  }
+}
+
+angular
+  .module('app')
+  .controller('mySvc', MySvc);
+```
+
 
 ## Directives
 
