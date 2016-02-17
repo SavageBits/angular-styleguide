@@ -1,5 +1,3 @@
-'use strict';
-
 class AccountCtrl {
   constructor() {
       this.myProperty = 'here i is';

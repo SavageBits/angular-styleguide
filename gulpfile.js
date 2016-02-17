@@ -3,6 +3,7 @@ var connect = require('gulp-connect');
 var open = require('gulp-open');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
+var lint = require('gulp-eslint');
 
 //@todo: add linting
 
@@ -16,7 +17,8 @@ var config = {
         js: [
             './app/src/**/*.js'
         ],
-        appJs: './app/app.js'
+        appJs: './app/app.js',
+        bundle: './bundle.js'
     },
     browser: 'chrome'
 };
@@ -46,18 +48,26 @@ gulp.task('html', function() {
 
 gulp.task('js', function() {
   gulp.src(config.paths.js)
-    .pipe(concat('bundle.js'))
     .pipe(babel({
       presets: ['es2015']
     }))
+    .pipe(concat(config.paths.bundle))
     .pipe(gulp.dest('.'))
     .pipe(connect.reload());
 });
 
+gulp.task('lint', function() {
+  gulp.src(config.paths.bundle)
+    .pipe(lint({
+      config: 'eslint.config.json'
+    }))
+    .pipe(lint.format());
+});
+
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
-    gulp.watch(config.paths.js, ['js']);
+    gulp.watch(config.paths.js, ['js', 'lint']);
     gulp.watch(config.paths.appJs, ['js']);
 });
 
-gulp.task('default', ['open', 'js', 'watch']);
+gulp.task('default', ['open', 'js', 'lint', 'watch']);

@@ -7,4 +7,4 @@ function AccountCard() {
 
 angular
   .module('app')
-  .directive('AccountCard', AccountCard);
+  .directive('accountCard', AccountCard);
