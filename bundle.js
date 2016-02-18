@@ -5,6 +5,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AccountSvc = function () {
+  AccountSvc.$inject = ["$http"];
   function AccountSvc($http) {
     _classCallCheck(this, AccountSvc);
 
@@ -39,6 +40,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AccountCtrl = function () {
+  AccountCtrl.$inject = ["accountSvc"];
   function AccountCtrl(accountSvc) {
     var _this = this;
 

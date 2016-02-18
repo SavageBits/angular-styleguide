@@ -4,6 +4,7 @@ var open = require('gulp-open');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var lint = require('gulp-eslint');
+var ngAnnotate = require('gulp-ng-annotate');
 
 //@todo: add linting
 
@@ -51,6 +52,7 @@ gulp.task('js', function() {
     .pipe(babel({
       presets: ['es2015']
     }))
+    .pipe(ngAnnotate())
     .pipe(concat(config.paths.bundle))
     .pipe(gulp.dest('.'))
     .pipe(connect.reload());
