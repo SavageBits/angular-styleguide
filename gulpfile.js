@@ -14,13 +14,15 @@ var config = {
             './index.html'
         ],
         js: [
-            './app/app.js',
-            './app/routes.js',
+            './app/app.module.js',
+            './app/app.routes.js',
+            './app/app.config.js',
             './app/src/**/*.js'
 
         ],
-        appJs: './app/app.js',
-        routeJs: './app/routes.js',
+        appJs: './app/app.module.js',
+        appRoutesJs: './app/app.routes.js',
+        appConfigJs: './app/app.config.js',
         bundle: './bundle.js'
     },
     browser: 'chrome'
@@ -72,7 +74,8 @@ gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
     gulp.watch(config.paths.js, ['js', 'lint']);
     gulp.watch(config.paths.appJs, ['js']);
-    gulp.watch(config.paths.routeJs, ['js']);
+    gulp.watch(config.paths.appRoutesJs, ['js']);
+    gulp.watch(config.paths.appConfigJs, ['js']);
 });
 
 gulp.task('default', ['open', 'js', 'lint', 'watch']);

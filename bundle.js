@@ -1,14 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['app.core']);
-
-//for debugging
-app.config(["$logProvider", function ($logProvider) {
-  $logProvider.debugEnabled(false);
-}]);
-
-//inject $log to use
-// $log.debug('hello!');
+var app = angular.module('app', ['app.core', 'app.widgets']);
 'use strict';
 
 angular.module('app').config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -23,16 +15,15 @@ angular.module('app').config(["$routeProvider", "$locationProvider", function ($
 		requireBase: false
 	});
 }]);
-'use strict';
+"use strict";
 
-function AccountCard() {
-  return {
-    restrict: 'E',
-    template: '<div>account card</div>'
-  };
-}
+//for debugging
+app.config(["$logProvider", function ($logProvider) {
+	$logProvider.debugEnabled(false);
+}]);
 
-angular.module('app').directive('accountCard', AccountCard);
+//inject $log to use
+// $log.debug('hello!');
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -93,4 +84,18 @@ var AccountSvc = function () {
 angular.module('app').service('accountSvc', AccountSvc);
 'use strict';
 
+// cross-application modules aggregated here
 angular.module('app.core', ['ngRoute']);
+'use strict';
+
+//application-specific components in this module
+angular.module('app.widgets', []);
+'use strict';
+
+function AccountCard() {
+	return {
+		templateUrl: 'app/src/widgets/accountCard/account-card.html'
+	};
+}
+
+angular.module('app.widgets').directive('accountCard', AccountCard);
