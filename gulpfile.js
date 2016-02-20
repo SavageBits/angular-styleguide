@@ -6,8 +6,6 @@ var concat = require('gulp-concat');
 var lint = require('gulp-eslint');
 var ngAnnotate = require('gulp-ng-annotate');
 
-//@todo: add linting
-
 var config = {
     port: 9008,
     devBaseUrl: 'http://localhost',
@@ -16,9 +14,13 @@ var config = {
             './index.html'
         ],
         js: [
+            './app/app.js',
+            './app/routes.js',
             './app/src/**/*.js'
+
         ],
         appJs: './app/app.js',
+        routeJs: './app/routes.js',
         bundle: './bundle.js'
     },
     browser: 'chrome'
@@ -70,6 +72,7 @@ gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
     gulp.watch(config.paths.js, ['js', 'lint']);
     gulp.watch(config.paths.appJs, ['js']);
+    gulp.watch(config.paths.routeJs, ['js']);
 });
 
 gulp.task('default', ['open', 'js', 'lint', 'watch']);
