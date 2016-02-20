@@ -1,15 +1,16 @@
 angular
 	.module('app')
-	.config(function(){
+	.config(function($routeProvider, $locationProvider){
+		$routeProvider
+			.when('/home', {
+				templateUrl: 'app/src/accounts/account-list.html'
+			})
+			.otherwise({
+				redirectTo: '/home'
+			});
 
+			$locationProvider.html5Mode({
+				enabled: true,
+				requireBase: false
+			});
 	});
-	//	function($routeProvider, $locationProvider) {
-		//$routeProvider
-		//	.when('/ploop', {
-		//		redirectTo: 'http://www.google.com'
-		//	})
-		//	.otherwise({
-		//		redirectTo: 'index.html'
-		//	});
-	//}
-//	);

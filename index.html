@@ -5,7 +5,12 @@
     <script src="bundle.js"></script>
   </head>
   <body ng-controller='AccountCtrl as accountCtrl'>
-    My property: {{ accountCtrl.myProperty }}
-    <account-card></account-card>
+    <div>
+      My property: {{ accountCtrl.myProperty }}
+      <account-card></account-card>
+    </div>
+    <div>
+      <div ng-view></div>
+    </div>
   </body>
 </html>

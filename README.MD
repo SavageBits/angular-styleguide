@@ -1,6 +1,6 @@
 # Angular Styleguide
 
-## Best practices for AngularJS 1.x + ES6
+## Best practices for AngularJS 1.x in ES5 + ES6
 
 ## Table of Contents
 
@@ -216,10 +216,10 @@ angular
 
 ## References
 
-[John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide)
-[John Papa's PluralSight course AngularJS Patterns: Clean Code](https://app.pluralsight.com/library/courses/angularjs-patterns-clean-code/table-of-contents)  
+[John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide)  
+[John Papa's PluralSight course AngularJS Patterns: Clean Code](https://app.pluralsight.com/library/courses/angularjs-patterns-clean-code/table-of-contents)    
 [Todd Motto's Angular styleguide](https://github.com/toddmotto/angular-styleguide)  
-[Cory House's React Slingshot](https://github.com/coryhouse/react-slingshot)
-[ECMAScript 6 in WebStorm: Transpiling](http://blog.jetbrains.com/webstorm/2015/05/ecmascript-6-in-webstorm-transpiling/)
+[Cory House's React Slingshot](https://github.com/coryhouse/react-slingshot)  
+[ECMAScript 6 in WebStorm: Transpiling](http://blog.jetbrains.com/webstorm/2015/05/ecmascript-6-in-webstorm-transpiling/)  
 
 [<< Back to contents](#table-of-contents)
