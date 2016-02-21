@@ -1,11 +1,59 @@
+//angular
+//	.module('app')
+//	.config(function($routeProvider, $locationProvider){
+//		$routeProvider
+//			.when('/home', {
+//				templateUrl: 'app/src/accounts/account-list.html'
+//			})
+//			.otherwise({
+//				redirectTo: '/home'
+//			});
+//
+//			$locationProvider.html5Mode({
+//				enabled: true,
+//				requireBase: false
+//			});
+//	});
+"use strict";
 'use strict';
 
-var app = angular.module('app', ['app.core', 'app.widgets']);
+//for debugging
+angular.module('app').config(["$logProvider", function ($logProvider) {
+	$logProvider.debugEnabled(false);
+}]);
+
+//inject $log to use
+// $log.debug('hello!');
 'use strict';
 
-angular.module('app').config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
+//class AccountCtrl {
+//  constructor(accountSvc,$log) {
+//    $log.debug('debug from AccountCtrl');
+//
+//    this.myProperty = 'here i is';
+//
+//    accountSvc.myGetFunction('/assets/data/contacts.json')
+//      .then(result => this.accounts = result.accounts);
+//  }
+//
+//  myFunction(arg) {
+//    console.log(arg);
+//  }
+//}
+
+function AccountCtrl() {
+  var vm = this;
+  vm.myProperty = 'oh hey';
+}
+
+angular.module('app.accounts').controller('AccountCtrl', AccountCtrl);
+'use strict';
+
+angular.module('app.accounts').config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
 	$routeProvider.when('/home', {
-		templateUrl: 'app/src/accounts/account-list.html'
+		templateUrl: 'app/src/accounts/account-list.html',
+		controller: 'AccountCtrl',
+		controllerAs: 'vm'
 	}).otherwise({
 		redirectTo: '/home'
 	});
@@ -15,48 +63,6 @@ angular.module('app').config(["$routeProvider", "$locationProvider", function ($
 		requireBase: false
 	});
 }]);
-"use strict";
-
-//for debugging
-app.config(["$logProvider", function ($logProvider) {
-	$logProvider.debugEnabled(false);
-}]);
-
-//inject $log to use
-// $log.debug('hello!');
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var AccountCtrl = function () {
-  AccountCtrl.$inject = ["accountSvc", "$log"];
-  function AccountCtrl(accountSvc, $log) {
-    var _this = this;
-
-    _classCallCheck(this, AccountCtrl);
-
-    $log.debug('debug from AccountCtrl');
-
-    this.myProperty = 'here i is';
-
-    accountSvc.myGetFunction('/assets/data/contacts.json').then(function (result) {
-      return _this.accounts = result.accounts;
-    });
-  }
-
-  _createClass(AccountCtrl, [{
-    key: 'myFunction',
-    value: function myFunction(arg) {
-      console.log(arg);
-    }
-  }]);
-
-  return AccountCtrl;
-}();
-
-angular.module('app').controller('AccountCtrl', AccountCtrl);
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -81,15 +87,7 @@ var AccountSvc = function () {
   return AccountSvc;
 }();
 
-angular.module('app').service('accountSvc', AccountSvc);
-'use strict';
-
-// cross-application modules aggregated here
-angular.module('app.core', ['ngRoute']);
-'use strict';
-
-//application-specific components in this module
-angular.module('app.widgets', []);
+angular.module('app.accounts').service('accountSvc', AccountSvc);
 'use strict';
 
 function AccountCard() {
@@ -99,3 +97,10 @@ function AccountCard() {
 }
 
 angular.module('app.widgets').directive('accountCard', AccountCard);
+'use strict';
+
+function UserDetail() {
+	return {};
+}
+
+angular.module('app.widgets').directive('userDetail', UserDetail);

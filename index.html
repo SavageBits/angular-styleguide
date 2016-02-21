@@ -1,12 +1,13 @@
-<html ng-app='app' ng-strict-di>
+<html ng-app='app'>
   <head>
     <script src="assets/lib/angular.js"></script>
     <script src="assets/lib/angular-route.min.js"></script>
+    <script src="module-bundle.js"></script>
     <script src="bundle.js"></script>
   </head>
-  <body ng-controller='AccountCtrl as accountCtrl'>
+  <body>
     <div>
-      My property: {{ accountCtrl.myProperty }}
+      My property: {{ myProperty }}
       <account-card></account-card>
     </div>
     <div>

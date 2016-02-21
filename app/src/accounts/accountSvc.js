@@ -9,5 +9,5 @@ class AccountSvc {
 }
 
 angular
-  .module('app')
+  .module('app.accounts')
   .service('accountSvc', AccountSvc);

@@ -1,4 +1,5 @@
-var app = angular.module('app',[
+angular.module('app',[
 	'app.core',
-	'app.widgets'
+	'app.widgets',
+	'app.accounts'
 ]);

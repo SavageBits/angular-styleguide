@@ -14,16 +14,20 @@ var config = {
             './index.html'
         ],
         js: [
-            './app/app.module.js',
             './app/app.routes.js',
             './app/app.config.js',
+            '!./app/src/**/*.module.js',
             './app/src/**/*.js'
-
         ],
         appJs: './app/app.module.js',
         appRoutesJs: './app/app.routes.js',
         appConfigJs: './app/app.config.js',
-        bundle: './bundle.js'
+        modulesJs: [
+            './app/app.module.js',
+            './app/src/**/*.module.js'
+        ],
+        bundle: './bundle.js',
+        moduleBundle: './module-bundle.js'
     },
     browser: 'chrome'
 };
@@ -51,7 +55,7 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('js', function() {
+gulp.task('js', ['init'], function() {
   gulp.src(config.paths.js)
     .pipe(babel({
       presets: ['es2015']
@@ -60,6 +64,17 @@ gulp.task('js', function() {
     .pipe(concat(config.paths.bundle))
     .pipe(gulp.dest('.'))
     .pipe(connect.reload());
+});
+
+gulp.task('init', function() {
+    gulp.src(config.paths.modulesJs)
+      .pipe(babel({
+          presets: ['es2015']
+      }))
+      .pipe(ngAnnotate())
+      .pipe(concat(config.paths.moduleBundle))
+      .pipe(gulp.dest('.'))
+      .pipe(connect.reload());
 });
 
 gulp.task('lint', function() {
