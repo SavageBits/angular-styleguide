@@ -1,9 +1,9 @@
 function UserDetail() {
-	return {
-		templateUrl: 'app/src/widgets/userDetail/user-detail.html'
-	}
+  return {
+    templateUrl: 'app/src/widgets/userDetail/user-detail.html'
+  }
 }
 
 angular
-	.module('app.widgets')
-	.directive('userDetail', UserDetail);
+  .module('app.widgets')
+  .directive('userDetail', UserDetail);

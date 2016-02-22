@@ -1,6 +1,6 @@
 angular.module('app',[
 	'app.core',
-	'app.widgets',
-	'app.accounts',
-	'app.users'
+  'app.widgets',
+  'app.accounts',
+  'app.users'
 ]);
