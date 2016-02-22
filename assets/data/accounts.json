@@ -1,0 +1,59 @@
+[
+  {
+    "id" : "CO556033",
+    "displayName" : "742 Evergreen Ter.",
+    "product" : {
+      "type" : "VA Home Purchase Loan",
+      "propertyAddress" : {
+        "street"  : "742 Evergreen Ter.",
+        "street2" : "",
+        "city"    : "Springfield",
+        "state"   : { "full" : "Missouri", "abbrev" : "MO" },
+        "zip"     : "65203"
+      },
+      "purchaseAmount"       : "185000.00",
+      "maxPreapprovalAmount" : "200000.00"
+    },
+    "milestone" : 1,
+    "tasks" : [
+      {
+        "taskId" : "p1"
+      }
+    ],
+    "loId": 42
+  },
+  {
+    "id" : "CO556034",
+    "displayName" : "31 Spooner St.",
+    "product" : {
+      "type" : "VA Home Purchase Loan",
+      "propertyAddress" : {
+        "street"  : "31 Spooner St.",
+        "street2" : "",
+        "city"    : "Quahog",
+        "state"   : { "full" : "Rhode Island", "abbrev" : "RI" },
+        "zip"     : "00093"
+      },
+      "purchaseAmount"       : "185000.00",
+      "maxPreapprovalAmount" : "200000.00"
+    },
+    "loId": 42
+  },
+  {
+    "id" : "CO556035",
+    "displayName" : "1400 Veterans United Dr.",
+    "product" : {
+      "type" : "VA Home Refinance Loan",
+      "propertyAddress" : {
+        "street"  : "1400 Veterans United Dr.",
+        "street2" : "",
+        "city"    : "Columbia",
+        "state"   : { "full" : "Missouri", "abbrev" : "MO" },
+        "zip"     : "65203"
+      },
+      "purchaseAmount"       : "185000.00",
+      "maxPreapprovalAmount" : "200000.00"
+    },
+    "loId": 42
+  }
+]

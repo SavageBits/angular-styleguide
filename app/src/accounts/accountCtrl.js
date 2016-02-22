@@ -13,9 +13,14 @@
 //  }
 //}
 
-function AccountCtrl() {
+function AccountCtrl(accountSvc) {
   var vm = this;
   vm.myProperty = 'oh hey';
+
+  accountSvc.myGetFunction('/assets/data/accounts.json')
+    .then(function(response) {
+      vm.accounts = response.data;
+    });
 }
 
 angular

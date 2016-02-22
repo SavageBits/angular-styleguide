@@ -41,21 +41,42 @@ angular.module('app').config(["$logProvider", function ($logProvider) {
 //  }
 //}
 
-function AccountCtrl() {
+AccountCtrl.$inject = ["accountSvc"];
+function AccountCtrl(accountSvc) {
   var vm = this;
   vm.myProperty = 'oh hey';
+
+  accountSvc.myGetFunction('/assets/data/accounts.json').then(function (response) {
+    vm.accounts = response.data;
+  });
 }
 
 angular.module('app.accounts').controller('AccountCtrl', AccountCtrl);
 'use strict';
 
+AccountDetailCtrl.$inject = ["accountSvc", "$routeParams", "$scope"];
+function AccountDetailCtrl(accountSvc, $routeParams, $scope) {
+	var vm = this;
+
+	accountSvc.getAccountById($routeParams.accountId, function (account) {
+		vm.account = account;
+	});
+}
+
+angular.module('app.accounts').controller('AccountDetailCtrl', AccountDetailCtrl);
+'use strict';
+
 angular.module('app.accounts').config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
-	$routeProvider.when('/home', {
-		templateUrl: 'app/src/accounts/account-list.html',
+	$routeProvider.when('/', {
+		templateUrl: '/app/src/accounts/account-list.html',
 		controller: 'AccountCtrl',
 		controllerAs: 'vm'
+	}).when('/detail/:accountId', {
+		templateUrl: '/app/src/accounts/account-detail.html',
+		controller: 'AccountDetailCtrl',
+		controllerAs: 'vm'
 	}).otherwise({
-		redirectTo: '/home'
+		redirectTo: '/'
 	});
 
 	$locationProvider.html5Mode({
@@ -82,6 +103,18 @@ var AccountSvc = function () {
     value: function myGetFunction(myApiRoute) {
       return this.$http.get(myApiRoute);
     }
+  }, {
+    key: 'getAccountById',
+    value: function getAccountById(accountId, successCallback) {
+      this.$http.get('/assets/data/accounts.json').then(function (response) {
+        console.log(response);
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].id == accountId) {
+            successCallback(response.data[i]);
+          }
+        }
+      });
+    }
   }]);
 
   return AccountSvc;
@@ -100,7 +133,9 @@ angular.module('app.widgets').directive('accountCard', AccountCard);
 'use strict';
 
 function UserDetail() {
-	return {};
+	return {
+		templateUrl: 'app/src/widgets/userDetail/user-detail.html'
+	};
 }
 
 angular.module('app.widgets').directive('userDetail', UserDetail);
