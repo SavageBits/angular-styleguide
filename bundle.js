@@ -19,7 +19,7 @@
 
 //for debugging
 angular.module('app').config(["$logProvider", function ($logProvider) {
-	$logProvider.debugEnabled(false);
+	$logProvider.debugEnabled(true);
 }]);
 
 //inject $log to use
@@ -121,6 +121,13 @@ var AccountSvc = function () {
 }();
 
 angular.module('app.accounts').service('accountSvc', AccountSvc);
+'use strict';
+
+angular.module('app.users').config(["$routeProvider", function ($routeProvider) {
+	$routeProvider.when('/users', {
+		templateUrl: '/app/src/users/user-list.html'
+	});
+}]);
 'use strict';
 
 function AccountCard() {

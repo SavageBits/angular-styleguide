@@ -19,7 +19,6 @@ var config = {
             '!./app/src/**/*.module.js',
             './app/src/**/*.js'
         ],
-        appJs: './app/app.module.js',
         appRoutesJs: './app/app.routes.js',
         appConfigJs: './app/app.config.js',
         modulesJs: [
@@ -88,9 +87,7 @@ gulp.task('lint', function() {
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
     gulp.watch(config.paths.js, ['js', 'lint']);
-    gulp.watch(config.paths.appJs, ['js']);
-    gulp.watch(config.paths.appRoutesJs, ['js']);
-    gulp.watch(config.paths.appConfigJs, ['js']);
+    gulp.watch(config.paths.modulesJs, ['js']);
 });
 
 gulp.task('default', ['open', 'js', 'lint', 'watch']);

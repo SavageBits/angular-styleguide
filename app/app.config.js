@@ -2,7 +2,7 @@
 angular
 	.module('app')
 	.config(function($logProvider){
-		$logProvider.debugEnabled(false);
+		$logProvider.debugEnabled(true);
 	});
 
 //inject $log to use
