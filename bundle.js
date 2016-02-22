@@ -19,7 +19,7 @@
 
 //for debugging
 angular.module('app').config(["$logProvider", function ($logProvider) {
-	$logProvider.debugEnabled(true);
+  $logProvider.debugEnabled(true);
 }]);
 
 //inject $log to use
@@ -56,33 +56,33 @@ angular.module('app.accounts').controller('AccountCtrl', AccountCtrl);
 
 AccountDetailCtrl.$inject = ["accountSvc", "$routeParams", "$scope"];
 function AccountDetailCtrl(accountSvc, $routeParams, $scope) {
-	var vm = this;
+  var vm = this;
 
-	accountSvc.getAccountById($routeParams.accountId, function (account) {
-		vm.account = account;
-	});
+  accountSvc.getAccountById($routeParams.accountId, function (account) {
+    vm.account = account;
+  });
 }
 
 angular.module('app.accounts').controller('AccountDetailCtrl', AccountDetailCtrl);
 'use strict';
 
 angular.module('app.accounts').config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
-	$routeProvider.when('/', {
-		templateUrl: '/app/src/accounts/account-list.html',
-		controller: 'AccountCtrl',
-		controllerAs: 'vm'
-	}).when('/detail/:accountId', {
-		templateUrl: '/app/src/accounts/account-detail.html',
-		controller: 'AccountDetailCtrl',
-		controllerAs: 'vm'
-	}).otherwise({
-		redirectTo: '/'
-	});
+  $routeProvider.when('/', {
+    templateUrl: '/app/src/accounts/account-list.html',
+    controller: 'AccountCtrl',
+    controllerAs: 'vm'
+  }).when('/detail/:accountId', {
+    templateUrl: '/app/src/accounts/account-detail.html',
+    controller: 'AccountDetailCtrl',
+    controllerAs: 'vm'
+  }).otherwise({
+    redirectTo: '/'
+  });
 
-	$locationProvider.html5Mode({
-		enabled: true,
-		requireBase: false
-	});
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
 }]);
 'use strict';
 
@@ -124,25 +124,25 @@ angular.module('app.accounts').service('accountSvc', AccountSvc);
 'use strict';
 
 angular.module('app.users').config(["$routeProvider", function ($routeProvider) {
-	$routeProvider.when('/users', {
-		templateUrl: '/app/src/users/user-list.html'
-	});
+  $routeProvider.when('/users', {
+    templateUrl: '/app/src/users/user-list.html'
+  });
 }]);
 'use strict';
 
 function AccountCard() {
-	return {
-		templateUrl: 'app/src/widgets/accountCard/account-card.html'
-	};
+  return {
+    templateUrl: 'app/src/widgets/accountCard/account-card.html'
+  };
 }
 
 angular.module('app.widgets').directive('accountCard', AccountCard);
 'use strict';
 
 function UserDetail() {
-	return {
-		templateUrl: 'app/src/widgets/userDetail/user-detail.html'
-	};
+  return {
+    templateUrl: 'app/src/widgets/userDetail/user-detail.html'
+  };
 }
 
 angular.module('app.widgets').directive('userDetail', UserDetail);

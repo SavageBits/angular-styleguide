@@ -27,8 +27,7 @@ var config = {
       ],
       bundle: './bundle.js',
       moduleBundle: './module-bundle.js'
-  },
-  browser: 'chrome'
+  }
 };
 
 gulp.task('connect', function() {
