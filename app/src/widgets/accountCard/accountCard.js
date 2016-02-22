@@ -1,6 +1,6 @@
 function AccountCard() {
   return {
-    templateUrl: 'app/src/widgets/accountCard/account-card.html'
+    templateUrl: '/app/src/widgets/accountCard/account-card.html'
   }
 }
 
