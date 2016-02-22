@@ -1,5 +1,5 @@
 angular
-	.module('app.accounts')
+  .module('app.accounts')
   .config(function($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
