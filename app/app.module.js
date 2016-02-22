@@ -1,5 +1,5 @@
 angular.module('app',[
-	'app.core',
+  'app.core',
   'app.widgets',
   'app.accounts',
   'app.users'
