@@ -45,8 +45,12 @@ This will build the AngularJS app and open it in your default browser.
 
 ## Tools
 
-* [JetBrains WebStorm](https://www.jetbrains.com/webstorm/)  
-    * **Configure WebStorm for ES6.** *File >> Settings >> Languages & Frameworks >> JavaScript >> JavaScript language version*
+* Editors
+  * [JetBrains WebStorm](https://www.jetbrains.com/webstorm/) - **Configure WebStorm for ES6.** *File >> Settings >> Languages & Frameworks >> JavaScript >> JavaScript language version*
+  * [Visual Studio Code](https://code.visualstudio.com/)
+
+* Command line
+  * PowerShell or Terminal if on MacOS
 
 I also used [Atom](https://atom.io/) extensively but ultimately found it too buggy and RAM-intensive. 
 
@@ -54,21 +58,23 @@ I also used [Atom](https://atom.io/) extensively but ultimately found it too bug
 
 ## Foundations of AngularJS
 
-//@todo: add whys in the form of avoid vs recommend
+`//@todo: add whys in the form of avoid vs prefer`
 
-**Components should have one role.**
-**DOM manipulation should happen only in directives.**
-**Avoid using jQuery.**
-**One component per file (applies to modules, controllers, services, directives, etc).**
-**Data and logic operations should be done in services.**
+**Components should have one role.**  
+**DOM manipulation should happen only in directives.**  
+**Data and logic operations should be done in services.**  
+**Avoid using jQuery.**  
+**Create one component per file (applies to modules, controllers, services, directives, etc).**  
+  
 
-**The LIFT Principle.**
- - **L**ocating our code is easy.
- - **I**dentify code at a glance.
- - **F**lat structure as long as possible.
- - **T**ry to stay DRY
+### File organization best practices  
+File organization is based on the **LIFT** principle.  
+ * **L**ocate our code easily.
+ * **I**dentify code at a glance.
+ * **F**lat structure kept as long as possible.
+ * **T**ry to stay DRY
 
-**File organization best practices.** Avoid inconsistency. Prefer organizing projects by feature.
+Avoid inconsistency. Prefer organizing projects by feature.
 
 ```
 /* by type */
@@ -121,6 +127,13 @@ angular.module('app')
 
 ## Build tools and transpilation
 
+The `gulpfile.js` defines our build script and our transpilation via Babel. There are other tutorials on these tools, so here's what's noteworthy:
+
+* [gulp-ng-annotate](https://www.npmjs.com/package/gulp-ng-annotate) - Injection annotations for uglification protection 
+* [gulp-babel](https://www.npmjs.com/package/gulp-babel) - Transpilation from ES5 to ES6
+* module-bundle.js - Guarantees that containing modules exist before dependencies that require them. Includes `app.module.js`, all feature modules (`*.module.js`), our cross-cutting components (`core.module.js`), and our application-specific components (`widgets.module.js`)
+* bundle.js - all other 1st party JavaScript source
+
 [AngularJS 1.x](http://www.angularjs.org)
 
 [<< Back to contents](#table-of-contents)
@@ -160,7 +173,7 @@ See [Cordova integration](#cordova-integration) for mobile development bootstrap
 To support future migration to Angular 2, avoid usage of $scope. Reference data on the controller by using "controller as" and "controllerName.propertyName".
 
 ```javascript
-/* ES6 */
+/* ES6 accountCtrl.js */
 class AccountCtrl {
   constructor() {
       this.myProperty = 'my property';
@@ -184,29 +197,85 @@ angular
 ## Services
 
 ```javascript
-/* ES6 */
-class MySvc {
-  constructor($http) {    
-      this.$http = $http;
+/* accountSvc.js */
+class AccountSvc {
+  constructor($http) {
+    this.$http = $http;
   }
 
   myGetFunction(myApiRoute) {
     return this.$http.get(myApiRoute);
   }
+
+  getAccountById(accountId, successCallback) {
+    this.$http.get('/assets/data/accounts.json')
+      .then(function(response) {
+        for (var i=0; i < response.data.length; i++) {
+          if (response.data[i].id == accountId) {
+            successCallback(response.data[i]);
+            break;
+          }
+        }
+      });
+  }
 }
 
 angular
-  .module('app')
-  .controller('mySvc', MySvc);
+  .module('app.accounts')
+  .service('accountSvc', AccountSvc);
 ```
 
 [<< Back to contents](#table-of-contents)
 
 ## Directives
 
+In Angular 1.x, the `.directive()` method expects a factory function with specific properties, so there is no direct path from ES5 to ES6 without some really unsavory code.
+
+```javascript
+/* accountCard.js */
+function AccountCard() {
+  return {
+    templateUrl: 'app/src/widgets/accountCard/account-card.html'
+  }
+}
+
+angular
+  .module('app.widgets')
+  .directive('accountCard', AccountCard);
+```
+
 [<< Back to contents](#table-of-contents)
 
 ## Routing
+
+Each feature is responsible for handling routing to its own views which reference that feature's controller(s).
+
+```javascript
+/* accounts.routes.js */
+angular
+  .module('app.accounts')
+  .config(function($routeProvider,$locationProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: '/app/src/accounts/account-list.html',
+        controller: 'AccountCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/detail/:accountId', {
+        templateUrl: '/app/src/accounts/account-detail.html',
+        controller: 'AccountDetailCtrl',
+        controllerAs: 'vm'
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
+
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    })
+  });
+```
 
 [<< Back to contents](#table-of-contents)
 
@@ -221,5 +290,6 @@ angular
 [Todd Motto's Angular styleguide](https://github.com/toddmotto/angular-styleguide)  
 [Cory House's React Slingshot](https://github.com/coryhouse/react-slingshot)  
 [ECMAScript 6 in WebStorm: Transpiling](http://blog.jetbrains.com/webstorm/2015/05/ecmascript-6-in-webstorm-transpiling/)  
+[Exploring ES6 Classes In AngularJS 1.x](http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x)
 
 [<< Back to contents](#table-of-contents)
