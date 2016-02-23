@@ -58,7 +58,7 @@ I also used [Atom](https://atom.io/) extensively but ultimately found it too bug
 
 ## Foundations of AngularJS
 
-//@todo: add whys in the form of avoid vs recommend
+`//@todo: add whys in the form of avoid vs prefer`
 
 **Components should have one role.**  
 **DOM manipulation should happen only in directives.**  
@@ -127,9 +127,14 @@ angular.module('app')
 
 ## Build tools and transpilation
 
+The `gulpfile.js` defines our build script and our transpilation via Babel. There are other tutorials on these tools, so here's what's noteworthy:
+
+* [gulp-ng-annotate](https://www.npmjs.com/package/gulp-ng-annotate) - Injection annotations for uglification protection 
+* [gulp-babel](https://www.npmjs.com/package/gulp-babel) - Transpilation from ES5 to ES6
+* module-bundle.js - Guarantees that containing modules exist before dependencies that require them. Includes `app.module.js`, all feature modules (`*.module.js`), our cross-cutting components (`core.module.js`), and our application-specific components (`widgets.module.js`)
+* bundle.js - all other 1st party JavaScript source
+
 [AngularJS 1.x](http://www.angularjs.org)
-
-
 
 [<< Back to contents](#table-of-contents)
 
@@ -168,7 +173,7 @@ See [Cordova integration](#cordova-integration) for mobile development bootstrap
 To support future migration to Angular 2, avoid usage of $scope. Reference data on the controller by using "controller as" and "controllerName.propertyName".
 
 ```javascript
-/* ES6 */
+/* ES6 accountCtrl.js */
 class AccountCtrl {
   constructor() {
       this.myProperty = 'my property';
@@ -205,10 +210,10 @@ class AccountSvc {
   getAccountById(accountId, successCallback) {
     this.$http.get('/assets/data/accounts.json')
       .then(function(response) {
-        console.log(response);
         for (var i=0; i < response.data.length; i++) {
           if (response.data[i].id == accountId) {
             successCallback(response.data[i]);
+            break;
           }
         }
       });
