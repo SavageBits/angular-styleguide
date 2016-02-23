@@ -227,6 +227,7 @@ angular
 In Angular 1.x, the `.directive()` method expects a factory function with specific properties, so there is no direct path from ES5 to ES6 without some really unsavory code.
 
 ```javascript
+/* accountCard.js */
 function AccountCard() {
   return {
     templateUrl: 'app/src/widgets/accountCard/account-card.html'
@@ -241,6 +242,35 @@ angular
 [<< Back to contents](#table-of-contents)
 
 ## Routing
+
+Each feature is responsible for handling routing to its own views which reference that feature's controller(s).
+
+```javascript
+/* accounts.routes.js */
+angular
+  .module('app.accounts')
+  .config(function($routeProvider,$locationProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: '/app/src/accounts/account-list.html',
+        controller: 'AccountCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/detail/:accountId', {
+        templateUrl: '/app/src/accounts/account-detail.html',
+        controller: 'AccountDetailCtrl',
+        controllerAs: 'vm'
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
+
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    })
+  });
+```
 
 [<< Back to contents](#table-of-contents)
 
