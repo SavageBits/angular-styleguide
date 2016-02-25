@@ -15,6 +15,7 @@
   1. [Services](#services)
   1. [Directives](#directives)
   1. [Routing](#routing)
+  1. [Testing](#testing)
   1. [Cordova integration](#cordova-integration)
   1. [References](#references)
 

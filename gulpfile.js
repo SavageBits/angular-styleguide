@@ -17,6 +17,7 @@ var config = {
           './app/app.routes.js',
           './app/app.config.js',
           '!./app/src/**/*.module.js',
+          '!./app/src/**/*.spec.js',
           './app/src/**/*.js'
       ],
       appRoutesJs: './app/app.routes.js',

@@ -90,10 +90,12 @@ var AccountSvc = function () {
     key: 'getAccountById',
     value: function getAccountById(accountId, successCallback) {
       this.$http.get('/assets/data/accounts.json').then(function (response) {
-        console.log(response);
-        for (var i = 0; i < response.data.length; i++) {
-          if (response.data[i].id == accountId) {
+        var i = undefined;
+
+        for (i = 0; i < response.data.length; i += 1) {
+          if (response.data[i].id === accountId) {
             successCallback(response.data[i]);
+            break;
           }
         }
       });
