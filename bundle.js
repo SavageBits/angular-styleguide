@@ -37,8 +37,8 @@ function AccountCtrl(accountSvc) {
 angular.module('app.accounts').controller('AccountCtrl', AccountCtrl);
 'use strict';
 
-AccountDetailCtrl.$inject = ["accountSvc", "$routeParams", "$scope"];
-function AccountDetailCtrl(accountSvc, $routeParams, $scope) {
+AccountDetailCtrl.$inject = ["$routeParams", "AccountSvc"];
+function AccountDetailCtrl($routeParams, AccountSvc) {
   var vm = this;
 
   accountSvc.getAccountById($routeParams.accountId, function (account) {
@@ -69,43 +69,58 @@ angular.module('app.accounts').config(["$routeProvider", "$locationProvider", fu
 }]);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+// ES6
+// class AccountSvc {
+//   constructor($http, $q) {
+//     this.$http = $http;
+//   }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+//   myGetFunction(myApiRoute) {
+//     return this.$http.get(myApiRoute);
+//   }
 
-var AccountSvc = function () {
-  AccountSvc.$inject = ["$http"];
-  function AccountSvc($http) {
-    _classCallCheck(this, AccountSvc);
+//   getAccountById(accountId, successCallback) {   
+//     this.$http.get('/assets/data/accounts.json')
+//       .then(function(response) {
+//         let i;
 
-    this.$http = $http;
-  }
+//         for  (i = 0; i < response.data.length; i += 1) {
+//           if (response.data[i].id === accountId) {
+//             successCallback(response.data[i]);
+//             break;
+//           }
+//         }
+//       });
+//   }
+// }
 
-  _createClass(AccountSvc, [{
-    key: 'myGetFunction',
-    value: function myGetFunction(myApiRoute) {
-      return this.$http.get(myApiRoute);
-    }
-  }, {
-    key: 'getAccountById',
-    value: function getAccountById(accountId, successCallback) {
-      this.$http.get('/assets/data/accounts.json').then(function (response) {
-        var i = undefined;
+// angular
+//   .module('app.accounts')
+//   .service('accountSvc', AccountSvc);
 
-        for (i = 0; i < response.data.length; i += 1) {
-          if (response.data[i].id === accountId) {
-            successCallback(response.data[i]);
-            break;
-          }
+AccountSvc.$inject = ["$http"];
+function AccountSvc($http) {
+  AccountSvc.myGetFunction = function (myApiRoute) {
+    return $http.get(myApiRoute);
+  };
+
+  AccountSvc.getAccountById = function (accountId, successCallback) {
+    $http.get('/assets/data/accounts.json').then(function (response) {
+      var i;
+
+      for (i = 0; i < response.data.length; i += 1) {
+        if (response.data[i].id === accountId) {
+          successCallback(response.data[i]);
+          break;
         }
-      });
-    }
-  }]);
+      }
+    });
+  };
 
   return AccountSvc;
-}();
+}
 
-angular.module('app.accounts').service('accountSvc', AccountSvc);
+angular.module('app.accounts').factory('AccountSvc', AccountSvc);
 'use strict';
 
 angular.module('app.users').config(["$routeProvider", function ($routeProvider) {
@@ -115,15 +130,6 @@ angular.module('app.users').config(["$routeProvider", function ($routeProvider) 
 }]);
 'use strict';
 
-function AccountCard() {
-  return {
-    templateUrl: '/app/src/widgets/accountCard/account-card.html'
-  };
-}
-
-angular.module('app.widgets').directive('accountCard', AccountCard);
-'use strict';
-
 function AccountDetailCard() {
   return {
     templateUrl: '/app/src/widgets/accountDetailCard/account-detail-card.html'
@@ -131,6 +137,15 @@ function AccountDetailCard() {
 }
 
 angular.module('app.widgets').directive('accountDetailCard', AccountDetailCard);
+'use strict';
+
+function AccountCard() {
+  return {
+    templateUrl: '/app/src/widgets/accountCard/account-card.html'
+  };
+}
+
+angular.module('app.widgets').directive('accountCard', AccountCard);
 'use strict';
 
 function UserDetail() {

@@ -28,7 +28,8 @@
   },
   "dependencies": {},
   "scripts": {
-    "test": "karma start",
-    "build": ""
+    "start": "gulp",
+    "test": "gulp build && karma start",
+    "build": "gulp build"
   }
 }

@@ -88,4 +88,6 @@ gulp.task('watch', function() {
   gulp.watch(config.paths.modulesJs, ['js']);
 });
 
+gulp.task('build', ['js']);
+
 gulp.task('default', ['open', 'js', 'lint', 'watch']);

@@ -1,4 +1,4 @@
-function AccountDetailCtrl(accountSvc, $routeParams, $scope) {
+function AccountDetailCtrl($routeParams, AccountSvc ) {
   var vm = this;
 
   accountSvc.getAccountById($routeParams.accountId, function(account) {
