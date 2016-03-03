@@ -118,9 +118,15 @@ As mentioned in [Testing](#testing), it's common to locate tests in the same dir
 
 Modules that are intended for re-use across multiple projects should be located in the `core` directory, which defines its own module in `core.module.js`.
 
+The core module will also define any application-specific dependencies such as `ngRoute`, `ngAnimate`, etc.
+
+The core module is then injected as a dependency into the main app module in `app.module.js`.
+
 ### Directives (Components)
 
 Application-specific components that do not belong to a single feature should be located in the 'widgets' directory, which defines its own module in `widgets.module.js`.
+
+The widgets module is then injected as a dependency into the main app module in `app.module.js`.
 
 [<< Back to contents](#table-of-contents)
 
