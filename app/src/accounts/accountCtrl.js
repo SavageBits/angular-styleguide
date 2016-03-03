@@ -13,8 +13,11 @@
 //  }
 //}
 
-function AccountCtrl(AccountSvc, $rootScope) {
+function AccountCtrl($rootScope, $log, AccountSvc) {
   var vm = this;
+  
+  $log.debug('Set $logProvider.debugEnabled(false) in app.config.js to turn this message off');
+    
   vm.myProperty = 'my property';
   
   $rootScope.$emit('titleChanged', 'home');

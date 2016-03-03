@@ -132,14 +132,23 @@ The widgets module is then injected as a dependency into the main app module in 
 
 ## Debugging
 
-**Use the unminified version of AngularJS for development.** Otherwise your error messages will be nearly useless.
+**Use the unminified version of AngularJS for development.** This will provide the most meaningful errors messages.
 
 Avoid `console.log()`. Prefer `$log.debug()`. To use `$log`, inject it as you would any other dependency. 
 
 By using the built-in `$logProvider`, you can easily enable logging for your entire application.
 
 ```javascript
-/* app.js */
+/* accountCtrl.js */
+function AccountCtrl($rootScope, $log, AccountSvc) {
+  var vm = this;
+  
+  $log.debug('Set $logProvider.debugEnabled(false) in app.config.js to turn this message off');
+/* ... */    
+```
+
+```javascript
+/* app.config.js */
 angular.module('app')
     .config(function($logProvider) {
         $logProvider.debugEnabled(true);
