@@ -1,7 +1,9 @@
-function AccountDetailCtrl($routeParams, AccountSvc ) {
+function AccountDetailCtrl($rootScope, $routeParams, AccountSvc ) {
   var vm = this;
 
-  accountSvc.getAccountById($routeParams.accountId, function(account) {
+  $rootScope.$emit('titleChanged', 'account detail');
+
+  AccountSvc.getAccountById($routeParams.accountId, function(account) {
     vm.account = account;
   });
 }

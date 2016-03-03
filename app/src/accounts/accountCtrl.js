@@ -13,11 +13,13 @@
 //  }
 //}
 
-function AccountCtrl(accountSvc) {
+function AccountCtrl(AccountSvc, $rootScope) {
   var vm = this;
-  vm.myProperty = 'oh hey';
+  vm.myProperty = 'my property';
+  
+  $rootScope.$emit('titleChanged', 'home');
 
-  accountSvc.myGetFunction('/assets/data/accounts.json')
+  AccountSvc.myGetFunction('/assets/data/accounts.json')
     .then(function(response) {
       vm.accounts = response.data;
     });

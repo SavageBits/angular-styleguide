@@ -15,6 +15,7 @@
   1. [Services](#services)
   1. [Directives](#directives)
   1. [Routing](#routing)
+  1. [Events](#events)
   1. [Testing](#testing)
   1. [Cordova integration](#cordova-integration)
   1. [References](#references)
@@ -277,6 +278,14 @@ angular
     })
   });
 ```
+
+[<< Back to contents](#table-of-contents)
+
+## Events
+
+[<< Back to contents](#table-of-contents)
+
+## Testing
 
 [<< Back to contents](#table-of-contents)
 

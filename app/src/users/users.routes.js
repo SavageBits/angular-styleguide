@@ -3,6 +3,7 @@ angular
   .config(function($routeProvider) {
     $routeProvider
       .when('/users', {
-        templateUrl: '/app/src/users/user-list.html'
+        templateUrl: '/app/src/users/user-list.html',
+        controller: 'UserCtrl'
       });
   });

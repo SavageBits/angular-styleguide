@@ -24,12 +24,14 @@ angular.module('app').config(["$logProvider", function ($logProvider) {
 //  }
 //}
 
-AccountCtrl.$inject = ["accountSvc"];
-function AccountCtrl(accountSvc) {
+AccountCtrl.$inject = ["AccountSvc", "$rootScope"];
+function AccountCtrl(AccountSvc, $rootScope) {
   var vm = this;
-  vm.myProperty = 'oh hey';
+  vm.myProperty = 'my property';
 
-  accountSvc.myGetFunction('/assets/data/accounts.json').then(function (response) {
+  $rootScope.$emit('titleChanged', 'home');
+
+  AccountSvc.myGetFunction('/assets/data/accounts.json').then(function (response) {
     vm.accounts = response.data;
   });
 }
@@ -37,11 +39,13 @@ function AccountCtrl(accountSvc) {
 angular.module('app.accounts').controller('AccountCtrl', AccountCtrl);
 'use strict';
 
-AccountDetailCtrl.$inject = ["$routeParams", "AccountSvc"];
-function AccountDetailCtrl($routeParams, AccountSvc) {
+AccountDetailCtrl.$inject = ["$rootScope", "$routeParams", "AccountSvc"];
+function AccountDetailCtrl($rootScope, $routeParams, AccountSvc) {
   var vm = this;
 
-  accountSvc.getAccountById($routeParams.accountId, function (account) {
+  $rootScope.$emit('titleChanged', 'account detail');
+
+  AccountSvc.getAccountById($routeParams.accountId, function (account) {
     vm.account = account;
   });
 }
@@ -123,20 +127,34 @@ function AccountSvc($http) {
 angular.module('app.accounts').factory('AccountSvc', AccountSvc);
 'use strict';
 
-angular.module('app.users').config(["$routeProvider", function ($routeProvider) {
-  $routeProvider.when('/users', {
-    templateUrl: '/app/src/users/user-list.html'
-  });
-}]);
-'use strict';
+HeaderCtrl.$inject = ["$rootScope"];
+function HeaderCtrl($rootScope) {
+  var vm = this;
 
-function AccountDetailCard() {
-  return {
-    templateUrl: '/app/src/widgets/accountDetailCard/account-detail-card.html'
-  };
+  $rootScope.$on('titleChanged', function (event, title) {
+    vm.title = title;
+  });
 }
 
-angular.module('app.widgets').directive('accountDetailCard', AccountDetailCard);
+angular.module('app.header').controller('HeaderCtrl', HeaderCtrl);
+'use strict';
+
+UserCtrl.$inject = ["$rootScope"];
+function UserCtrl($rootScope) {
+  var vm = this;
+
+  $rootScope.$emit('titleChanged', 'user detail');
+}
+
+angular.module('app.users').controller('UserCtrl', UserCtrl);
+'use strict';
+
+angular.module('app.users').config(["$routeProvider", function ($routeProvider) {
+  $routeProvider.when('/users', {
+    templateUrl: '/app/src/users/user-list.html',
+    controller: 'UserCtrl'
+  });
+}]);
 'use strict';
 
 function AccountCard() {
@@ -148,7 +166,26 @@ function AccountCard() {
 angular.module('app.widgets').directive('accountCard', AccountCard);
 'use strict';
 
-function UserDetail() {
+function NavHeader() {
+  return {
+    templateUrl: '/app/src/widgets/navHeader/nav-header.html'
+  };
+}
+
+angular.module('app.widgets').directive('navHeader', NavHeader);
+'use strict';
+
+function AccountDetailCard() {
+  return {
+    templateUrl: '/app/src/widgets/accountDetailCard/account-detail-card.html'
+  };
+}
+
+angular.module('app.widgets').directive('accountDetailCard', AccountDetailCard);
+'use strict';
+
+UserDetail.$inject = ["$rootScope"];
+function UserDetail($rootScope) {
   return {
     templateUrl: '/app/src/widgets/userDetail/user-detail.html'
   };

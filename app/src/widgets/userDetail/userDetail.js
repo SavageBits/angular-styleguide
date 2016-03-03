@@ -1,4 +1,4 @@
-function UserDetail() {
+function UserDetail($rootScope) {
   return {
     templateUrl: '/app/src/widgets/userDetail/user-detail.html'
   }
