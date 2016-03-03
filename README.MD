@@ -79,7 +79,7 @@ File organization is based on the **LIFT** principle.
 Avoid inconsistency. Prefer organizing projects by feature.
 
 ```
-/* by type */
+/* by feature by type */
 |__ app  
 |.. |__ accounts  
 |.. |.. |__ controllers
@@ -89,23 +89,30 @@ Avoid inconsistency. Prefer organizing projects by feature.
 |.. |.. |__ services
 |.. |.. |.. |-- accounts.js
 |.. |__ payments
+|.. |.. |__ controllers
+|__ test  
+|.. |__ accounts
+|.. |.. |__ services
+|.. |.. |.. |-- accounts.spec.js
 |__ [and so on]
 ```
 
 ```
-/* by feature */
+/* by feature - preferred */
 |__ app
 |.. |__ accounts
 |.. |.. |-- accountsCtrl.js
 |.. |.. |-- accounts.html
 |.. |.. |-- accountsSvc.js
+|.. |.. |-- accountsSvc.spec.js
 |.. |__ payments
 |.. |.. |-- paymentsCtrl.js
 |.. |.. |-- payments.html
 |.. |.. |-- paymentsSvc.js
+|.. |.. |-- paymentsSvc.spec.js
 |__ [and so on]
 ```
-
+As mentioned in [Testing](#testing), it's common to locate tests in the same directory as the unit-under-test.
 
 [<< Back to contents](#table-of-contents)
 
