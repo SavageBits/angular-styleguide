@@ -114,6 +114,14 @@ Avoid inconsistency. Prefer organizing projects by feature.
 ```
 As mentioned in [Testing](#testing), it's common to locate tests in the same directory as the unit-under-test.
 
+### Cross-cutting modules
+
+Modules that are intended for re-use across multiple projects should be located in the `core` directory, which defines its own module in `core.module.js`.
+
+### Directives (Components)
+
+Application-specific components that do not belong to a single feature should be located in the 'widgets' directory, which defines its own module in `widgets.module.js`.
+
 [<< Back to contents](#table-of-contents)
 
 ## Debugging
