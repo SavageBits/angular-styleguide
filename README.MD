@@ -1,4 +1,4 @@
-# Angular Styleguide
+# AngularJS Styleguide
 
 ## Best practices for AngularJS 1.x in ES5 + ES6
 
@@ -132,7 +132,7 @@ The widgets module is then injected as a dependency into the main app module in 
 
 ## Debugging
 
-**Use the unminified version of AngularJS for development.** This will provide the most meaningful errors messages.
+**Use the unminified version of AngularJS for development.** This will provide the most meaningful error messages.
 
 Avoid `console.log()`. Prefer `$log.debug()`. To use `$log`, inject it as you would any other dependency. 
 
@@ -261,7 +261,9 @@ angular
 
 ## Directives
 
-In Angular 1.x, the `.directive()` method expects a factory function with specific properties, so there is no direct path from ES5 to ES6 without some really unsavory code.
+In Angular 1.x, the `.directive()` method expects a factory function with specific properties, so there is no direct path from ES5 to ES6 without some really unsavory code.  
+
+That said, here are some good patterns for directives in 1.x.
 
 ```javascript
 /* accountCard.js */
