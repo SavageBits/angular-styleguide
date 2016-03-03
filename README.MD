@@ -283,9 +283,24 @@ angular
 
 ## Events
 
+The example injects `$rootScope` and uses `$on` and `$emit` to communicate between controllers using events.
+
+See [headerCtrl.js](https://github.com/SavageBits/angular-styleguide/blob/master/app/src/header/headerCtrl.js) and [accountDetailCtrl.js](https://github.com/SavageBits/angular-styleguide/blob/master/app/src/accounts/accountDetailCtrl.js).
+
 [<< Back to contents](#table-of-contents)
 
 ## Testing
+
+We're using [karma](https://karma-runner.github.io), [mocha](https://mochajs.org/), [chai](http://chaijs.com/), and [ngMock](https://docs.angularjs.org/api/ngMock) for testing.
+
+**Run tests.** `npm test`
+  * This will start karma and run tests in [PhantomJS](http://phantomjs.org/).  
+
+A typical pattern when organizing a project by feature is to locate tests with units-under-test. In this example, we've located the test for the account service (accountsSvc.spec.js) in the same directory as the account service itself (accountSvc.js).
+
+See [accountSvc.spec.js](https://github.com/SavageBits/angular-styleguide/blob/master/app/src/accounts/accountSvc.spec.js) for an example of mocking out a service along with the AngularJS built-in `$http` to test an async call that returns a promise.
+
+
 
 [<< Back to contents](#table-of-contents)
 

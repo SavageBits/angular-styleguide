@@ -4,6 +4,7 @@ angular
     $routeProvider
       .when('/users', {
         templateUrl: '/app/src/users/user-list.html',
-        controller: 'UserCtrl'
+        controller: 'UserCtrl',
+        controllerAs: 'vm'
       });
   });
