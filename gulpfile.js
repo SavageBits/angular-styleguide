@@ -11,7 +11,8 @@ var config = {
   devBaseUrl: 'http://localhost',
   paths: {
       html: [
-          './index.html'
+          './index.html',
+          './app/src/**/*.html'
       ],
       js: [
           './app/app.routes.js',

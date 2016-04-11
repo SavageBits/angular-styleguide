@@ -170,6 +170,23 @@ function AccountCard() {
 angular.module('app.widgets').directive('accountCard', AccountCard);
 'use strict';
 
+Info.$inject = ["$log"];
+function Info($log) {
+  return {
+    scope: {
+      title: '=infoTitle'
+    },
+    templateUrl: '/app/src/widgets/info/info.html',
+    transclude: true,
+    link: function link(scope, element, attributes, controller, transclude) {
+      element.find('.content').append(transclude());
+    }
+  };
+}
+
+angular.module('app').directive('info', Info);
+'use strict';
+
 function AccountDetailCard() {
   return {
     templateUrl: '/app/src/widgets/accountDetailCard/account-detail-card.html'

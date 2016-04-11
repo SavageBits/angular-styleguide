@@ -7,3 +7,4 @@ function AccountCard() {
 angular
   .module('app.widgets')
   .directive('accountCard', AccountCard);
+  
