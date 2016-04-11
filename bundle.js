@@ -24,9 +24,12 @@ angular.module('app').config(["$logProvider", function ($logProvider) {
 //  }
 //}
 
-AccountCtrl.$inject = ["AccountSvc", "$rootScope"];
-function AccountCtrl(AccountSvc, $rootScope) {
+AccountCtrl.$inject = ["$rootScope", "$log", "AccountSvc"];
+function AccountCtrl($rootScope, $log, AccountSvc) {
   var vm = this;
+
+  $log.debug('Set $logProvider.debugEnabled(false) in app.config.js to turn this message off');
+
   vm.myProperty = 'my property';
 
   $rootScope.$emit('titleChanged', 'home');
@@ -152,7 +155,8 @@ angular.module('app.users').controller('UserCtrl', UserCtrl);
 angular.module('app.users').config(["$routeProvider", function ($routeProvider) {
   $routeProvider.when('/users', {
     templateUrl: '/app/src/users/user-list.html',
-    controller: 'UserCtrl'
+    controller: 'UserCtrl',
+    controllerAs: 'vm'
   });
 }]);
 'use strict';
@@ -166,15 +170,6 @@ function AccountCard() {
 angular.module('app.widgets').directive('accountCard', AccountCard);
 'use strict';
 
-function NavHeader() {
-  return {
-    templateUrl: '/app/src/widgets/navHeader/nav-header.html'
-  };
-}
-
-angular.module('app.widgets').directive('navHeader', NavHeader);
-'use strict';
-
 function AccountDetailCard() {
   return {
     templateUrl: '/app/src/widgets/accountDetailCard/account-detail-card.html'
@@ -182,6 +177,15 @@ function AccountDetailCard() {
 }
 
 angular.module('app.widgets').directive('accountDetailCard', AccountDetailCard);
+'use strict';
+
+function NavHeader() {
+  return {
+    templateUrl: '/app/src/widgets/navHeader/nav-header.html'
+  };
+}
+
+angular.module('app.widgets').directive('navHeader', NavHeader);
 'use strict';
 
 UserDetail.$inject = ["$rootScope"];
@@ -192,3 +196,14 @@ function UserDetail($rootScope) {
 }
 
 angular.module('app.widgets').directive('userDetail', UserDetail);
+'use strict';
+
+(function () {
+  function Text() {
+    return {
+      templateUrl: '/app/src/core/input/text/input-text.html'
+    };
+  }
+
+  angular.module('app.core').directive('inputText', Text);
+})();

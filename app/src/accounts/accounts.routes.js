@@ -16,8 +16,8 @@ angular
         redirectTo: '/'
       });
 
-    $locationProvider.html5Mode({
+    $locationProvider.html5Mode({                  
       enabled: true,
       requireBase: false
-    })
+    });
   });
